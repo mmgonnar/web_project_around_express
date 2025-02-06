@@ -1,6 +1,7 @@
 const express = require("express");
-const fs = require("fs");
-const path = require("path");
+const userRoutes = require("./routes/users");
+//const fs = require("fs");
+//const path = require("path");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -10,32 +11,26 @@ app.use(express.json());
 //const users = JSON.parse(fs.readFileSync(path.join(__dirname, "users.json")));
 //const cards = JSON.parse(fs.readFileSync(path.join(__dirname, "cards.json")));
 
-const userRoutes = require("./routes/users");
 //app.use("/users");
 
-app.get("/users", userRoutes);
 //route 4 cards
 //app.get("/cards");
 
-// app.get("/users/id", (req, res) => {
-//   console.log(req);
-//   const userID = "";
-//   const user = "";
-//   if (user) {
-//     res.json(user);
-//   } else {
-//     res.sendStatus(404).json({ message: "ID not found" });
-//   }
-// });
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.url}`);
+  next();
+});
 
 //root
 app.get("/", (req, res) => {
   res.send("It works!");
 });
 
+app.get("/users", userRoutes);
+
 // not existing routes
 app.use((req, res) => {
-  res.status(404).json({ message: "Resource not found" });
+  res.status(404).json({ message: "Page not found" });
 });
 
 //start server
