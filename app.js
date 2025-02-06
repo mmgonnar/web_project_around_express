@@ -1,8 +1,6 @@
 const express = require("express");
 const userRoutes = require("./routes/users");
 const cardRoutes = require("./routes/cards");
-//const fs = require("fs");
-//const path = require("path");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
