@@ -3,15 +3,22 @@ const router = express.Router();
 const fs = require("fs");
 const path = require("path");
 
-fs.readFile(path.join(__dirname, "../data/users.json"), "utf8", (err, data) => {
-  if (err) {
-    res.status(500).send({
-      message: "Internal Server Error",
-    });
-    return;
-  } else {
-    return JSON.parse(data);
-  }
+// fs.readFile(path.join(__dirname, "../data/users.json"), "utf8", (err, data) => {
+//   if (err) {
+//     res.status(500).send({
+//       message: "Internal Server Error",
+//     });
+//     return;
+//   } else {
+//     return JSON.parse(data);
+//   }
+// });
+// another way
+router.get("/", (req, res) => {
+  fsPromises.readFile(path.join(__dirname, "users.json")).then((data) => {
+    const users = JSON.parse(data);
+    res.send(users);
+  });
 });
 
 router.get("/", (req, res) => {
