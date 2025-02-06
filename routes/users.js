@@ -3,10 +3,6 @@ const router = express.Router();
 const fs = require("fs");
 const path = require("path");
 
-// const users = JSON.parse(
-//   fs.readFileSync(path.join(__dirname, "../data/users.json"))
-// );
-
 fs.readFile(path.join(__dirname, "../data/users.json"), "utf8", (err, data) => {
   if (err) {
     res.status(500).send({
@@ -19,7 +15,6 @@ fs.readFile(path.join(__dirname, "../data/users.json"), "utf8", (err, data) => {
 });
 
 router.get("/", (req, res) => {
-  //console.log("X");
   res.json(users);
 });
 
