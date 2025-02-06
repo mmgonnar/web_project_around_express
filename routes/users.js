@@ -17,17 +17,17 @@ console.log(users);
 // }
 
 router.get("/", (req, res) => {
-  console.log("X");
+  //console.log("X");
   res.json(users);
 });
 
 router.get("/:id", (req, res) => {
   const { id } = req.params;
-  console.log("user w/id");
-  const user = users.find((user) => user._id === parseInt(id));
+  //console.log("user w/id");
+  const user = users.find((user) => user._id === id);
 
   if (!user) {
-    res.status(404).send({
+    return res.status(404).send({
       message: "User not found",
     });
   }

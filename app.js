@@ -16,17 +16,17 @@ app.use(express.json());
 //route 4 cards
 //app.get("/cards");
 
-app.use((req, res, next) => {
-  console.log(`${req.method} ${req.url}`);
-  next();
-});
+// app.use((req, res, next) => {
+//   console.log(`${req.method} ${req.url}`);
+//   next();
+// });
 
 //root
 app.get("/", (req, res) => {
   res.send("It works!");
 });
 
-app.get("/users", userRoutes);
+app.use("/users", userRoutes);
 
 // not existing routes
 app.use((req, res) => {
