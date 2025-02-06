@@ -4,10 +4,6 @@ const router = express.Router();
 const fs = require("fs");
 const path = require("path");
 
-// const cards = JSON.parse(
-//   fs.readFile(path.join(__dirname, "../data/cards.json"))
-// );
-
 router.get("/", (req, res) => {
   try {
     const cards = JSON.parse(
@@ -21,14 +17,7 @@ router.get("/", (req, res) => {
   }
 });
 
-fs.readFile(path, (err, data) => {
-  if (err) {
-    return res.status(500).send({});
-  } else {
-  }
-});
-///////
-
+//cards by id
 router.get("/:id", (req, res) => {
   const cards = JSON.parse(
     fs.readFileSync(path.join(__dirname, "../data/cards.json"))
