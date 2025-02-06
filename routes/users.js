@@ -3,18 +3,20 @@ const router = express.Router();
 const fs = require("fs");
 const path = require("path");
 
-const users = JSON.parse(
-  fs.readFileSync(path.join(__dirname, "../data/users.json"))
-);
-console.log(users);
+// const users = JSON.parse(
+//   fs.readFileSync(path.join(__dirname, "../data/users.json"))
+// );
 
-// let users;
-// try {
-//     users = JSON.parse(fs.readFileSync(path.join(__dirname, '../users.json')));
-//     console.log("Usuarios cargados:", users); // Verifica que los usuarios se carguen correctamente
-// } catch (error) {
-//     console.error("Error al cargar el archivo users.json:", error);
-// }
+fs.readFile(path.join(__dirname, "../data/users.json"), "utf8", (err, data) => {
+  if (err) {
+    res.status(500).send({
+      message: "Internal Server Error",
+    });
+    return;
+  } else {
+    return JSON.parse(data);
+  }
+});
 
 router.get("/", (req, res) => {
   //console.log("X");
@@ -36,21 +38,21 @@ router.get("/:id", (req, res) => {
   });
 });
 
-router.post("/", (req, res) => {
-  const { name, age } = req.body;
+// router.post("/", (req, res) => {
+//   const { name, age } = req.body;
 
-  if (!name || !age) {
-    massage: "Name & age required";
-  }
+//   if (!name || !age) {
+//     massage: "Name & age required";
+//   }
 
-  const newUser = {
-    id: user.lenght + 1,
-    name,
-    age,
-  };
-  res.status(201).send({
-    message: "User created",
-  });
-});
+//   const newUser = {
+//     id: user.lenght + 1,
+//     name,
+//     age,
+//   };
+//   res.status(201).send({
+//     message: "User created",
+//   });
+// });
 
 module.exports = router;
