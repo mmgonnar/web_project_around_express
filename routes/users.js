@@ -13,6 +13,7 @@ const path = require("path");
 //     return JSON.parse(data);
 //   }
 // });
+
 // another way
 router.get("/", (req, res) => {
   fsPromises.readFile(path.join(__dirname, "users.json")).then((data) => {
@@ -21,9 +22,9 @@ router.get("/", (req, res) => {
   });
 });
 
-router.get("/", (req, res) => {
-  res.json(users);
-});
+// router.get("/", (req, res) => {
+//   res.json(users);
+// });
 
 router.get("/:id", (req, res) => {
   const { id } = req.params;
