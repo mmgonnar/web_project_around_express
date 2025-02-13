@@ -21,6 +21,28 @@ const getCardById = async (req, res) => {
   }
 };
 
-const deleteCard = async () => {};
+const newCard = async (req, res) => {
+  const { title, description } = req.body;
+  const newCard = new Card({
+    title,
+    description,
+  });
 
-module.exports = { getCards, getCardById, deleteCard };
+  try {
+    const savedCard = await newCard.save();
+    res.status(201).json(savedCard);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+const deleteCard = async (req, res) => {
+  try {
+    const card = await Card.findById(req.params.cardId);
+    if (!card) {
+      return res.status(404).json({ message: "Card not found" });
+    }
+  } catch (err) {}
+};
+
+module.exports = { getCards, getCardById, newCard, deleteCard };
