@@ -6,7 +6,7 @@ const cardRoutes = require("./routes/cards");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const mongose = require("mongoose");
+const mongoose = require("mongoose");
 
 const dataBase = "mongodb://localhost:27017/aroundb";
 // 4 cors
@@ -16,7 +16,11 @@ const settings = {
   allowedHeaders: "Content-Type",
 };
 
-mongoose.connect(dataBase, {});
+mongoose.connect(dataBase, {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useFindAndModify: false,
+});
 //Cors Middleware
 app.use(cors(settings));
 //Middleware to parse JSON
