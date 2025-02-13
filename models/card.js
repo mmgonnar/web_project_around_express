@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const validator = required("validator");
 
 const cardSchema = new mongoose.Schema({
-  nname: {
+  name: {
     type: String,
     required: [true, "Name required"],
     minlength: 2,
@@ -32,3 +32,5 @@ const cardSchema = new mongoose.Schema({
     default: Date.now,
   },
 });
+
+modile.exports = mongoose.model("card", cardSchema);

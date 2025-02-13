@@ -4,7 +4,7 @@ const router = express.Router();
 //const fs = require("fs");
 //const path = require("path");
 
-const { getUsers, getUserById, createUser } = require("../controllers/user");
+const { getUsers, getUserById, createUser } = require("../controllers/users");
 
 // router.get("/", (req, res) => {
 //   fsPromises
