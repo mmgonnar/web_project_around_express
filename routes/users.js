@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const fsPromises = require("node:fs/promises");
-const fs = require("fs");
-const path = require("path");
+//const fsPromises = require("node:fs/promises");
+//const fs = require("fs");
+//const path = require("path");
+
 const { getUsers, getUserById, createUser } = require("../controllers/user");
 
 // router.get("/", (req, res) => {
@@ -14,7 +15,7 @@ const { getUsers, getUserById, createUser } = require("../controllers/user");
 //     });
 // });
 router.get("/user", getUsers);
-router.get("/user", getUserById);
+router.get("/users/:id", getUserById);
 router.post("/users", createUser);
 
 // router.get("/:id", (req, res) => {

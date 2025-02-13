@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 3000;
 
 const mongoose = require("mongoose");
 
-const dataBase = "mongodb://localhost:27017/aroundb";
+const DATABASE_URL = "mongodb://localhost:27017/aroundb";
 // 4 cors
 const settings = {
   origin: "https:localhost/3000",
@@ -16,26 +16,28 @@ const settings = {
   allowedHeaders: "Content-Type",
 };
 
-mongoose.connect(dataBase, {
-  useNewUrlParser: true,
-  useCreateIndex: true,
-  useFindAndModify: false,
+mongoose.connect(DATABASE_URL).then(() => {
+  console.log("connected");
 });
+
+//mongoose.connect("mongodb://localhost:27017/aroundb", );
+
 //Cors Middleware
 app.use(cors(settings));
 //Middleware to parse JSON
 app.use(express.json());
 //Middleware to get info
-app.use((req, res) => {
+app.use((req, res, next) => {
   console.log(`${new Date().toLocaleString()}, ${req.method}, ${req.url}`);
+  next();
 });
 
 //root
-// app.get("/", (req, res) => {
-//   res.send("It works!");
-// });
+app.get("/", (req, res) => {
+  res.send("It works!");
+});
 
-app.use("/", userRoutes);
+app.use("/", userRoutes); //users
 app.use("/cards", cardRoutes);
 
 // not existing routes

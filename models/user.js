@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const validator = require("validator");
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -17,10 +18,8 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     validate: {
-      validator: (err) => {
-        return /^(https?:\/\/)(www\.)?([a-zA-Z0-9._~:/?%#\[\]@!$&'()*+,;=]+)(\/[a-zA-Z0-9._~:/?%#\[\]@!$&'()*+,;=]*)*(#.*)?$/.test(
-          err
-        );
+      validator: (str) => {
+        return validator.isUrl(str);
       },
       message: "Invalid url",
     },
