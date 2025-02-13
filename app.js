@@ -17,7 +17,7 @@ const settings = {
 };
 
 mongoose.connect(DATABASE_URL).then(() => {
-  console.log("connected");
+  console.log("Server connected");
 });
 
 //mongoose.connect("mongodb://localhost:27017/aroundb", );
@@ -38,10 +38,11 @@ app.get("/", (req, res) => {
 });
 
 app.use("/", userRoutes); //users
-app.use("/cards", cardRoutes);
+app.use("/cards", cardRoutes); // cards
 
 // not existing routes
 app.use((req, res) => {
+  console.log(res);
   res.status(404).json({ message: "Page not found" });
 });
 

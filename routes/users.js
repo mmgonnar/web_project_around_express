@@ -14,8 +14,8 @@ const { getUsers, getUserById, createUser } = require("../controllers/user");
 //       res.send(users);
 //     });
 // });
-router.get("/user", getUsers);
-router.get("/users/:id", getUserById);
+router.get("/users", getUsers);
+router.get("/users/:userId", getUserById);
 router.post("/users", createUser);
 
 // router.get("/:id", (req, res) => {
