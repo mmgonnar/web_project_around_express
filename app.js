@@ -31,11 +31,11 @@ app.use((req, res) => {
 });
 
 //root
-app.get("/", (req, res) => {
-  res.send("It works!");
-});
+// app.get("/", (req, res) => {
+//   res.send("It works!");
+// });
 
-app.use("/users", userRoutes);
+app.use("/", userRoutes);
 app.use("/cards", cardRoutes);
 
 // not existing routes
@@ -45,5 +45,5 @@ app.use((req, res) => {
 
 //start server
 app.listen(PORT, () => {
-  console.log("Server listening");
+  console.log(`Server listening in http://localhost:${PORT}`);
 });
