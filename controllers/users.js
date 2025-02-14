@@ -3,7 +3,7 @@ const User = require("../models/user");
 const getUsers = async (req, res) => {
   console.log("get users");
   try {
-    const users = await User.find();
+    const users = await User.find().orFail(new Error("document not found"));
     res.json(users);
     //res.send({ data: users });
   } catch (err) {
@@ -15,7 +15,9 @@ const getUsers = async (req, res) => {
 const getUserById = async (req, res) => {
   console.log("GET /users/" + req.params.userId);
   try {
-    const user = await User.findById(req.params.userId);
+    const user = await User.findById(req.params.userId).orFail(
+      new Error("No user with that id has been found.")
+    );
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }

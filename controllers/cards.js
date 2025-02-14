@@ -2,7 +2,7 @@ const Card = require("../models/card");
 
 const getCards = async (req, res) => {
   try {
-    const cards = await Card.find();
+    const cards = await Card.find().orFail(new Error("document not found"));
     res.json(cards);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -11,7 +11,9 @@ const getCards = async (req, res) => {
 
 const getCardById = async (req, res) => {
   try {
-    const card = await Card.findById(req.params.cardId);
+    const card = await Card.findById(req.params.cardId).orFail(
+      new Error("No card with that id has been found.")
+    );
     if (!card) {
       return res.status(404).json({ message: "Card not found" });
     }
@@ -44,7 +46,9 @@ const newCard = async (req, res) => {
 
 const deleteCard = async (req, res) => {
   try {
-    const card = await Card.findByIdDelete(req.params.cardId);
+    const card = await Card.findByIdDelete(req.params.cardId).orFail(
+      new Error("document not found")
+    );
     if (!card) {
       return res.status(404).json({ message: "Card not found" });
     }
