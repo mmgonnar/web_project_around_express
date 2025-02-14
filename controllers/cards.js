@@ -13,13 +13,15 @@ const getCards = async (req, res) => {
 };
 
 const getCardById = async (req, res) => {
+  console.log(req.params);
   try {
-    const card = await Card.findById(req.params.cardId)
+    const card = await Card.findById(req.params.cardsId)
       .populate("owner")
       .orFail(new Error("No card with that id has been found."));
-    if (!card) {
-      return res.status(404).json({ message: "Card not found" });
-    }
+
+    // if (!card) {
+    //   return res.status(404).json({ message: "Card not found" });
+    // }
     res.json(card);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -68,7 +70,7 @@ const addLike = async (req, res) => {
     { $addToSet: { likes: req.user._id } },
     { new: true }
   );
-  res.send(addLike.like);
+  res.send(addLike);
 };
 
 const removeLike = async (req, res) => {
@@ -77,7 +79,7 @@ const removeLike = async (req, res) => {
     { $pull: { likes: req.user._id } },
     { new: true }
   );
-  res.send(removeLike.like);
+  res.send(removeLike);
 };
 
 module.exports = {

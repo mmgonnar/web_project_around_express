@@ -17,8 +17,8 @@ router.get("/cards", getCards);
 router.get("/cards/:cardsId", getCardById);
 router.post("/cards", createCard);
 router.delete("/cards", deleteCard);
-router.put("/cards", addLike);
-router.delete("/cards", removeLike);
+router.patch("/cards/:cardId/likes", addLike);
+router.delete("/cards/:cardId/likes", removeLike);
 
 // router.get("/", (req, res) => {
 //   try {

@@ -8,7 +8,8 @@ const {
   getUsers,
   getUserById,
   createUser,
-  updateProfile,
+  updateUser,
+  updateAvatar,
 } = require("../controllers/users");
 
 // router.get("/", (req, res) => {
@@ -22,7 +23,8 @@ const {
 router.get("/users", getUsers);
 router.get("/users/:userId", getUserById);
 router.post("/users", createUser);
-router.patch("/users", updateProfile);
+router.patch("/users/me", updateUser);
+router.patch("/users/avatar", updateAvatar);
 
 // router.get("/:id", (req, res) => {
 //   const users = JSON.parse(

@@ -40,14 +40,14 @@ const createUser = async (req, res) => {
   }
 };
 
-const updateProfile = async (req, res) => {
+const updateUser = async (req, res) => {
   const { name, about } = req.body;
   try {
-    const user = await User.findByIdAndUpdate(req.params.userId, {
+    const updateUser = await User.findByIdAndUpdate(req.user._id, {
       name,
       about,
     }).orFail(new Error("User not found"));
-    res.json(user);
+    res.json(updateUser);
   } catch (err) {
     if (err.message === "User not found") {
       return res.status(404).json({ message: err.message });
@@ -56,4 +56,25 @@ const updateProfile = async (req, res) => {
   }
 };
 
-module.exports = { getUsers, getUserById, createUser, updateProfile };
+const updateAvatar = async (req, res) => {
+  const { avatar } = req.body;
+  try {
+    const updateAvatar = await User.findByIdAndUpdate(req.user._id, {
+      avatar,
+    }).orFail(new Error("Document not found)"));
+    res.json(updateAvatar);
+  } catch (err) {
+    if (err.message === "User not found") {
+      return res.status(404).json({ message: err.message });
+    }
+    res.status(500).json({ message: err.message });
+  }
+};
+
+module.exports = {
+  getUsers,
+  getUserById,
+  createUser,
+  updateUser,
+  updateAvatar,
+};
