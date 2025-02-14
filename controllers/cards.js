@@ -19,9 +19,6 @@ const getCardById = async (req, res) => {
       .populate("owner")
       .orFail(new Error("No card with that id has been found."));
 
-    // if (!card) {
-    //   return res.status(404).json({ message: "Card not found" });
-    // }
     res.json(card);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -31,10 +28,6 @@ const getCardById = async (req, res) => {
 const createCard = async (req, res) => {
   const { name, link } = req.body;
   const userId = req.user._id;
-
-  // if (!name || !link) {
-  //   return res.status(400).json({ message: "Name & link required" });
-  // }
 
   const createCard = new Card({
     name,

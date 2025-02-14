@@ -20,8 +20,6 @@ mongoose.connect(DATABASE_URL).then(() => {
   console.log("Server connected");
 });
 
-//mongoose.connect("mongodb://localhost:27017/aroundb", );
-
 //Cors Middleware
 app.use(cors(settings));
 //Middleware to parse JSON
