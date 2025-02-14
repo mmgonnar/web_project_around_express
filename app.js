@@ -31,6 +31,13 @@ app.use((req, res, next) => {
   console.log(`${new Date().toLocaleString()}, ${req.method}, ${req.url}`);
   next();
 });
+app.use((req, res, next) => {
+  req.user = {
+    _id: "67a6a48c3cccac8a1471d246",
+  };
+
+  next();
+});
 
 //root
 app.get("/", (req, res) => {
@@ -38,7 +45,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/", userRoutes); //users
-app.use("/cards", cardRoutes); // cards
+app.use("/", cardRoutes); // cards
 
 // not existing routes
 app.use((req, res) => {
