@@ -5,10 +5,8 @@ const getUsers = async (req, res) => {
   try {
     const users = await User.find().orFail(new Error("document not found"));
     res.json(users);
-    //res.send({ data: users });
   } catch (err) {
     res.status(500).json({ message: err.message });
-    //res.status(500).send({ message: 'Error'})
   }
 };
 
@@ -42,4 +40,20 @@ const createUser = async (req, res) => {
   }
 };
 
-module.exports = { getUsers, getUserById, createUser };
+const updateProfile = async (req, res) => {
+  const { name, about } = req.body;
+  try {
+    const user = await User.findByIdAndUpdate(req.params.userId, {
+      name,
+      about,
+    }).orFail(new Error("User not found"));
+    res.json(user);
+  } catch (err) {
+    if (err.message === "User not found") {
+      return res.status(404).json({ message: err.message });
+    }
+    res.status(500).json({ message: err.message });
+  }
+};
+
+module.exports = { getUsers, getUserById, createUser, updateProfile };

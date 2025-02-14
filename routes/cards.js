@@ -1,20 +1,24 @@
-const { error } = require("console");
+//const { error } = require("console");
 const express = require("express");
 const router = express.Router();
 //const fsPromises = require("node:fs/promises");
-const fs = require("fs");
-const path = require("path");
+//const fs = require("fs");
+//const path = require("path");
 const {
   getCards,
   getCardById,
-  newCard,
+  createCard,
   deleteCard,
+  addLike,
+  removeLike,
 } = require("../controllers/cards");
 
 router.get("/cards", getCards);
 router.get("/cards/:cardsId", getCardById);
-router.post("/cards", newCard);
+router.post("/cards", createCard);
 router.delete("/cards", deleteCard);
+router.put("/cards", addLike);
+router.delete("/cards", removeLike);
 
 // router.get("/", (req, res) => {
 //   try {

@@ -4,7 +4,12 @@ const router = express.Router();
 //const fs = require("fs");
 //const path = require("path");
 
-const { getUsers, getUserById, createUser } = require("../controllers/users");
+const {
+  getUsers,
+  getUserById,
+  createUser,
+  updateProfile,
+} = require("../controllers/users");
 
 // router.get("/", (req, res) => {
 //   fsPromises
@@ -17,6 +22,7 @@ const { getUsers, getUserById, createUser } = require("../controllers/users");
 router.get("/users", getUsers);
 router.get("/users/:userId", getUserById);
 router.post("/users", createUser);
+router.patch("/users", updateProfile);
 
 // router.get("/:id", (req, res) => {
 //   const users = JSON.parse(
