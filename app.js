@@ -39,7 +39,8 @@ app.use((req, res, next) => {
 
 //root
 app.get("/", (req, res) => {
-  res.send("It works!");
+  console.log("Received a request at the root endpoint.");
+  res.send(200);
 });
 
 app.use("/", userRoutes); //users
